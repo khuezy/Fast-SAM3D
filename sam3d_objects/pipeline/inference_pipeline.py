@@ -88,13 +88,13 @@ class InferencePipeline:
 
         pose_decoder_name="default",
         workspace_dir="",
-        downsample_ss_dist=0,  
-        ss_inference_steps=25,
+        downsample_ss_dist=4,  
+        ss_inference_steps=20,
         ss_rescale_t=3,
         ss_cfg_strength=7,
         ss_cfg_interval=[0, 500],
         ss_cfg_strength_pm=0.0,
-        slat_inference_steps=25,
+        slat_inference_steps=20,
         slat_rescale_t=3,
         slat_cfg_strength=5,
         slat_cfg_interval=[0, 500],
@@ -109,6 +109,7 @@ class InferencePipeline:
         self.device = torch.device(device)
         self.compile_model = compile_model
         logger.info(f"self.device: {self.device}")
+        logger.info(f"self.rendering_engine: {self.rendering_engine}")
         logger.info(f"CUDA_VISIBLE_DEVICES: {os.environ.get('CUDA_VISIBLE_DEVICES', None)}")
         logger.info(f"Actually using GPU: {torch.cuda.current_device()}")
         with self.device:
@@ -569,7 +570,7 @@ class InferencePipeline:
                 outputs["mesh"][0],
                 # Optional parameters
                 simplify=0.95,  
-                texture_size=1024,  
+                texture_size=256,  
                 verbose=False,
                 with_mesh_postprocess=with_mesh_postprocess,
                 with_texture_baking=with_texture_baking,
@@ -788,7 +789,7 @@ class InferencePipeline:
                     coords, coords_scores, downsample_factor = downsample_with_feature_fusion(
                     coords_raw, 
                     coords_scores, 
-                    max_coords=42000, 
+                    max_coords=10000, 
                     downsample_factor = factor,
                     fusion_mode='max') 
 
@@ -799,7 +800,7 @@ class InferencePipeline:
                     coords, coords_scores, downsample_factor = downsample_with_feature_fusion(
                     coords_raw, 
                     coords_scores, 
-                    max_coords=42000, 
+                    max_coords=10000, 
                     downsample_factor = factor,
                     fusion_mode='max') 
 

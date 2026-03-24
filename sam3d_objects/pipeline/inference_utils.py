@@ -436,7 +436,7 @@ def calculate_adaptive_factor(hfer_2d, hfer_3d, high_thresh = 0.7,low_thresh = 0
 def downsample_with_feature_fusion(
     coord_batch, 
     coords_scores, 
-    max_coords=42000, 
+    max_coords=10000, 
     downsample_factor=2,
     fusion_mode='mean',
 ):

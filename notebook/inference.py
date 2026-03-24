@@ -145,8 +145,8 @@ class Inference:
             with_texture_baking=bake,
             with_layout_postprocess=True, 
             use_vertex_color=not bake, 
-            stage1_inference_steps=25,
-            stage2_inference_steps=25,
+            stage1_inference_steps=20,
+            stage2_inference_steps=20,
             pointmap=pointmap,
         )
 
