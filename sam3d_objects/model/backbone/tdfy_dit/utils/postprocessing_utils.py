@@ -372,7 +372,7 @@ def bake_texture(
     texture_size: int = 256,
     near: float = 0.1,
     far: float = 10.0,
-    mode: Literal["fast", "opt"] = "fast",
+    mode: Literal["fast", "opt"] = "opt",
     lambda_tv: float = 1e-2,
     verbose: bool = False,
     rendering_engine: str = "nvdiffrast",  # nvdiffrast OR "pytorch3d"
@@ -650,7 +650,7 @@ def to_glb(
             extrinsics,
             intrinsics,
             texture_size=texture_size,
-            mode="fast",
+            mode="opt",
             lambda_tv=0.01,
             verbose=verbose,
             rendering_engine=rendering_engine
