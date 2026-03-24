@@ -89,7 +89,7 @@ class Inference:
 
     def __init__(self, config: DictConfig,compile: bool = False, args =None):
         
-        config.rendering_engine = "pytorch3d"  # overwrite to disable nvdiffrast
+        config.rendering_engine = "nvdiffrast"  # overwrite to disable pytorch3d
         config.compile_model = compile 
         check_hydra_safety(config, WHITELIST_FILTERS, BLACKLIST_FILTERS)
         self.hfer_2d = 0
@@ -128,6 +128,8 @@ class Inference:
         image: Union[Image.Image, np.ndarray], # 图像
         mask: Optional[Union[None, Image.Image, np.ndarray]], # mask
         seed: Optional[int] = None,
+        bake: Optional[bool] = False,
+        postprocess: Optional[bool] = False,
         pointmap=None,
     ) -> dict:
         
@@ -138,11 +140,12 @@ class Inference:
             None,
             seed,
             stage1_only=False,
-            with_mesh_postprocess=False,
-            with_texture_baking=False,
+            with_mesh_postprocess=postprocess,
+            with_texture_baking=bake,
             with_layout_postprocess=True, 
             use_vertex_color=True, 
-            stage1_inference_steps=None,
+            stage1_inference_steps=25,
+            stage2_inference_steps=25,
             pointmap=pointmap,
         )
 

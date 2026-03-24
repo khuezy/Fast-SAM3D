@@ -57,12 +57,7 @@ def preprocess_for_fft_masked(image_path, target_size=256):
 
 
 
-def calculate_hfer_robust(image_path, radius_ratio=0.15):
-    try:
-        img = preprocess_for_fft_masked(image_path)
-    except Exception as e:
-        print(f"Error (HFER): {e}")
-        return 0.0
+def calculate_hfer_robust(img, radius_ratio=0.15):
 
     rows, cols = img.shape
     crow, ccol = rows // 2, cols // 2
