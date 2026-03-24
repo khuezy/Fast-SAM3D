@@ -2,7 +2,7 @@
 import os
 import sys
 # not ideal to put that here
-os.environ["CUDA_HOME"] = os.environ["CONDA_PREFIX"]
+# os.environ["CUDA_HOME"] = os.environ["CONDA_PREFIX"]
 os.environ["LIDRA_SKIP_INIT"] = "true"
 
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
