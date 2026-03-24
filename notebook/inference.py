@@ -87,8 +87,9 @@ BLACKLIST_FILTERS = [
 
 class Inference:
 
-    def __init__(self, config: DictConfig,compile: bool = False, args =None):
-        
+    def __init__(self, config_file: str,compile: bool = False, args =None):
+        config = OmegaConf.load(config_file) 
+        config.workspace_dir = os.path.dirname(config_file)
         config.rendering_engine = "nvdiffrast"  # overwrite to disable pytorch3d
         config.compile_model = compile 
         check_hydra_safety(config, WHITELIST_FILTERS, BLACKLIST_FILTERS)
